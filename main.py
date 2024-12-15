@@ -1,32 +1,14 @@
-import requests
+import os
 
-# Vulnerability: Hardcoded secret (Triggers secrets detection)
-API_KEY = "12345-ABCDEF-SECRET"
+# Hardcoded secret (Kwetsbaarheid)
+API_KEY = "12345-abcde-67890"
 
-def fetch_data(url):
-    # Vulnerability: Hardcoded sensitive data (Triggers secrets detection)
-    headers = {"Authorization": f"Bearer {API_KEY}"}
+# Insecure code (Kwetsbaarheid)
+os.system("rm -rf /")
 
-    # Vulnerability: Using requests without verifying SSL (Triggers dependency scanning)
-    response = requests.get(url, headers=headers, verify=False)
 
-    if response.status_code == 200:
-        return response.json()
-    else:
-        # Vulnerability: Weak error handling (May trigger SAST if flagged by CodeQL)
-        print("Failed to fetch data:", response.status_code)
-        return None
+def say_hello():
+    print("Hello, Secure Pipeline!")
 
-def main():
-    # Vulnerability: Hardcoded URL (May trigger SAST depending on the tool's rules)
-    url = "https://example.com/api/data"
 
-    # Vulnerability: Insecure direct object reference (IDOR)
-    data = fetch_data(url + "?id=1")
-
-    # Output fetched data
-    if data:
-        print("Fetched Data:", data)
-
-if __name__ == "__main__":
-    main()
+say_hello()
