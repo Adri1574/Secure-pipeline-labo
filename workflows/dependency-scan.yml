@@ -1,0 +1,27 @@
+# .github/workflows/dependency-scan.yml
+name: Dependency Scan
+
+on:
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * 0' # Run weekly on Sunday at midnight
+  workflow_dispatch: # Allow manual triggers for testing
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  scan:
+    name: Dependency Scanning
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run OWASP Dependency Check
+        uses: dependency-check/dependency-check-action@v2.1.2
+        with:
+          format: 'ALL'
+          output-directory: './dependency-check-report'
