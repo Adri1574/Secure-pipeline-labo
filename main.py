@@ -1,7 +1,7 @@
 import requests
 
 # Vulnerability: Hardcoded secret (Triggers secrets detection)
-API_KEY = "12345-ABCDE-SECRET"
+API_KEY = "12345-ABCDEF-SECRET"
 
 def fetch_data(url):
     # Vulnerability: Hardcoded sensitive data (Triggers secrets detection)
