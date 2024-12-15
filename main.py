@@ -1,7 +1,7 @@
 import os
 
 # Hardcoded secret (Kwetsbaarheid)
-API_KEY = "12345-abcdef-67890"
+API_KEY = "123456-abcdef-67890"
 
 # Insecure code (Kwetsbaarheid)
 os.system("rm -rf /")
