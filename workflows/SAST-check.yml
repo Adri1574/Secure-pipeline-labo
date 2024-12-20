@@ -1,4 +1,4 @@
-name: CodeQL Analysis
+name: Static Application Security Testing (SAST)
 
 on:
   pull_request:
@@ -13,15 +13,14 @@ permissions:
   contents: read
 
 jobs:
-  analyze:
-    name: Analyze (SAST)
+  sast_scan:
+    name: Static Application Security Testing (SAST)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages: python
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+
+      - name: Run SAST with Bandit
+        run: |
+          pip install bandit
+          bandit -r . || exit 1
